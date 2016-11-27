@@ -5,7 +5,15 @@ body {
 
 .main {
   width: 100%;
+}
 
+.sort {
+  text-align: right;
+}
+
+.sort select {
+  height: 30px;
+  width: 30%;
 }
 
 .thumbnail {
@@ -37,5 +45,8 @@ body {
 @media all and (max-width: 600px) { 
   .thumbnail {
     flex: 0 0 100%; 
+  }
+  .sort select {
+    width: 100%;
   }
 }

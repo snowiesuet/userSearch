@@ -10,13 +10,15 @@
   </head>
   <body>
     <div class="main">
-      <select>
-        <option disabled selected>Sort by:</option>
-        <option># of followers</option>
-        <option># of repos</option>
-        <option>user type</option>
-        <option>alphabetically</option>
-      </select>
+      <div class="sort">
+        <select onchange="sortData(this)">
+          <option disabled selected>Sort by:</option>
+          <option value="followers"># of followers</option>
+          <option value="repos"># of repos</option>
+          <option value="type">user type</option>
+          <option value="userID">alphabetically</option>
+        </select>
+      </div>
       <div class="container"></div>
     </div>
   </body>

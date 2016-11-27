@@ -1,5 +1,7 @@
 'use strict'
 
+let tempData = [];
+
 window.onload = function() {
   onStart();
 }
@@ -9,39 +11,57 @@ function onStart () {
     url: 'data.json',
     type: 'get',
     dataType: 'json',
-  }).done(dataset => {
+  }).success(dataset => {
     if (dataset.length > 0) {
       dataset.forEach(data => {
-        const userID = data.login
-        const avatar = data.avatar_url
-        const htmlUrl = data.html_url
         const followers = data.followers_url
         const repos = data.repos_url
-        const type = data.type
-        const rowTemplate =
-          `<div class="thumbnail">
-            <div class="content">
-              <img src="${avatar}"</img>
-              <div class="info">
-                <div class="name">${userID}</div>
-                <div>Followers: ${followers.length}</div>
-                <div>Repos: ${repos.length}</div>
-                <div>Type: ${type}</div>
-                <a href="${htmlUrl}">View more</a>
-              </div>
-            </div>
-          </div>`
-      $('.container').append(rowTemplate)
+        tempData.push({
+          userID: data.login,
+          avatar: data.avatar_url,
+          htmlUrl: data.html_url,
+          followers: followers.length,
+          repos: repos.length,
+          type: data.type
+        })
       })
     } else {
       //if no data, display this!
-      $('#searchResults').html(`<div class="thumbnail ">No data available.</div>`)
+      $('#main').html(`<div class="thumbnail ">No data available.</div>`)
     }
+  }).done(data =>{
+    print()
   })
 }
 
-function sortData(value) {
-  arr = arr.sort(function(a, b) {
-    return (a[value] > b[value]);
+function print() {
+  //clear the container before sorting
+  $('.container').html('');
+  for (let value of tempData) {
+    const thumbnail =
+    `<div class="thumbnail">
+      <div class="content">
+        <img src="${value.avatar}"</img>
+        <div class="info">
+          <div class="name">${value.userID}</div>
+          <div>Followers: ${value.followers}</div>
+          <div>Repos: ${value.repos}</div>
+          <div>Type: ${value.type}</div>
+          <a href="${value.htmlUrl}">View profile</a>
+        </div>
+      </div>
+    </div>`
+    $('.container').append(thumbnail)
+  }
+}
+
+function sortData(param) {
+  var value = param.value;
+  tempData = tempData.sort(function(a, b) {
+    if (typeof a[value] == 'string') {
+      return (a[value].toLowerCase() > b[value].toLowerCase());
+    }
+      return (a[value] > b[value]);
   });
+  print()
 }
