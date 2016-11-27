@@ -1,5 +1,7 @@
 'use strict'
 
+//this is best viewed in modern browser that supports ES6
+
 let tempData = [];
 
 window.onload = function() {
@@ -8,7 +10,7 @@ window.onload = function() {
 
 function onStart () {
   $.ajax({
-    url: 'data.json',
+    url: 'https://api.github.com/users',
     type: 'get',
     dataType: 'json',
   }).success(dataset => {
@@ -57,6 +59,7 @@ function print() {
 
 function sortData(param) {
   var value = param.value;
+  //only works for ES6
   tempData = tempData.sort(function(a, b) {
     if (typeof a[value] == 'string') {
       return (a[value].toLowerCase() > b[value].toLowerCase());
