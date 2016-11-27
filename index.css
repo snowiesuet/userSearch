@@ -1,0 +1,41 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+}
+
+.main {
+  width: 100%;
+
+}
+
+.thumbnail {
+  display: inline-block;
+  padding: 1%;
+  min-width: 30%;
+}
+
+.thumbnail .name {
+  color: #ed1c24;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+}
+
+.content img {
+  margin: 20px;
+  width: 100px;
+  height: 100px;
+}
+
+.content .info {
+  flex: 1;
+}
+
+@media all and (max-width: 600px) { 
+  .thumbnail {
+    flex: 0 0 100%; 
+  }
+}
